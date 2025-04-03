@@ -3,9 +3,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pegasus_gym_mx/utils/DopplerSecrets.dart';
 
 void main() async {
-  runApp(MyApp());
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(); // Carga .env
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
