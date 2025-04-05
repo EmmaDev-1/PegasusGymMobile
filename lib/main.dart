@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pegasus_gym_mx/utils/DopplerSecrets.dart';
+import 'package:pegasus_gym_mx/utils/colors.dart';
+import 'package:sizer/sizer.dart';
 import 'route/app_router.dart';
 
 Future<void> main() async {
   // Ensure that widget binding is initialized before running the app.
   WidgetsFlutterBinding.ensureInitialized();
+  // Lock the app in portrait mode only.
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   // Load environment variables from the .env file.
   await dotenv.load();
   // Run the app wrapped in ProviderScope to enable Riverpod state management.
@@ -21,20 +29,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // MaterialApp.router is used to integrate the declarative routing provided by GoRouter.
-    // The router configuration is imported from the AppRouter class.
-    return MaterialApp.router(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // The theme uses a color scheme generated from a deep purple seed color.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      // Connects the GoRouter's routerDelegate to handle route navigation.
-      routerDelegate: AppRouter.router.routerDelegate,
-      // Parses the route information (such as URL paths) using GoRouter.
-      routeInformationParser: AppRouter.router.routeInformationParser,
-      // Provides the route information to the MaterialApp.
-      routeInformationProvider: AppRouter.router.routeInformationProvider,
+    // MaterialApp.router is the router configuration is imported from the AppRouter class.
+    // Sizer is use to implement an responsive design
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return MaterialApp.router(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: AppColors.accent),
+          ),
+          debugShowCheckedModeBanner: false,
+          // Connects the GoRouter's routerDelegate to handle route navigation.
+          routerDelegate: AppRouter.router.routerDelegate,
+          // Parses the route information (such as URL paths) using GoRouter.
+          routeInformationParser: AppRouter.router.routeInformationParser,
+          // Provides the route information to the MaterialApp.
+          routeInformationProvider: AppRouter.router.routeInformationProvider,
+        );
+      },
     );
   }
 }
