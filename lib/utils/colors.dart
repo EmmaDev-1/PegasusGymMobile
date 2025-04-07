@@ -12,4 +12,6 @@ class AppColors {
   static const Color white = Color.fromARGB(255, 255, 255, 255);
 
   static const Color accent = Color.fromARGB(255, 255, 42, 87);
+
+  static const Color darkBlue = Color(0xFF1F4368);
 }

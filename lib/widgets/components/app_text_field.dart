@@ -12,6 +12,7 @@ class AppTextField extends StatelessWidget {
   final IconData? prefixIcon;
   final Widget? suffixIcon;
   final TextInputType fieldType;
+  final double cornerRadius;
 
   const AppTextField({
     super.key,
@@ -22,6 +23,7 @@ class AppTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     required this.fieldType,
+    this.cornerRadius = 30.0,
   });
 
   @override
@@ -54,15 +56,15 @@ class AppTextField extends StatelessWidget {
           filled: true,
           fillColor: AppColors.white,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(cornerRadius),
             borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(cornerRadius),
             borderSide: const BorderSide(color: AppColors.white, width: 1.0),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30.0),
+            borderRadius: BorderRadius.circular(cornerRadius),
             borderSide: BorderSide(
               color: AppColors.accent.withOpacity(0.4),
               width: 1.8,

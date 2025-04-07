@@ -8,6 +8,8 @@ class AppImage extends StatelessWidget {
   final BoxFit fit;
   final double? width;
   final double? height;
+  final Color borderColor;
+  final double borderWidth;
 
   const AppImage({
     required this.imageUrl,
@@ -17,27 +19,44 @@ class AppImage extends StatelessWidget {
     this.fit = BoxFit.cover,
     required this.width,
     this.height,
+    this.borderColor = Colors.white, // 👈 color por defecto
+    this.borderWidth = 0.0, // 👈 sin borde por defecto
   });
+
+  bool get _isNetworkImage => imageUrl.startsWith('http');
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: borderRadius ?? BorderRadius.all(Radius.circular(0)),
-      child: CachedNetworkImage(
-        imageUrl: imageUrl,
-        fit: fit,
-        width: width,
-        height: height,
-        placeholder:
-            (context, url) => Image.asset(
-              placeholderPath ?? '',
-              fit: fit,
-              width: width,
-              height: height,
-            ),
-        errorWidget:
-            (context, url, error) =>
-                Image.asset('', fit: fit, width: width, height: height),
+    final resolvedRadius = borderRadius ?? BorderRadius.zero;
+
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: borderColor, width: borderWidth),
+        borderRadius: resolvedRadius,
+      ),
+      child: ClipRRect(
+        borderRadius: resolvedRadius,
+        child:
+            _isNetworkImage
+                ? CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: fit,
+                  width: width,
+                  height: height,
+                  placeholder:
+                      (context, url) =>
+                          placeholderPath != null
+                              ? Image.asset(
+                                placeholderPath!,
+                                fit: fit,
+                                width: width,
+                                height: height,
+                              )
+                              : const SizedBox.shrink(),
+                  errorWidget:
+                      (context, url, error) => const Icon(Icons.broken_image),
+                )
+                : Image.asset(imageUrl, fit: fit, width: width, height: height),
       ),
     );
   }
