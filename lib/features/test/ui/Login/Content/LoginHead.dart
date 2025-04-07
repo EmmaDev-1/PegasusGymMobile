@@ -10,7 +10,7 @@ class LoginHead extends StatelessWidget {
     return ClipPath(
       clipper: _BottomWaveClipper(),
       child: Container(
-        height: screenHeight * 0.3,
+        height: screenHeight * 0.25,
         width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(

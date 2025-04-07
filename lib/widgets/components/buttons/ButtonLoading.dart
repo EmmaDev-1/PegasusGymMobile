@@ -36,7 +36,7 @@ class ButtonLoading extends StatelessWidget {
         width: double.infinity,
         height:
             MediaQuery.of(context).size.width /
-            10, // similar a screenWidthDp.dp / 10
+            9, // similar a screenWidthDp.dp / 10
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(cornerRadius),
           border: Border.all(
@@ -71,7 +71,7 @@ class ButtonLoading extends StatelessWidget {
                   style: TextStyle(
                     fontSize: fontSize,
                     fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                     color: isEnabled ? enabledTextColor : disabledTextColor,
                   ),
                 ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pegasus_gym_mx/utils/colors.dart';
+import 'package:pegasus_gym_mx/widgets/components/app_image.dart';
+import 'package:pegasus_gym_mx/widgets/components/app_text.dart';
 import 'package:pegasus_gym_mx/widgets/components/buttons/ButtonLoading.dart';
 import 'package:sizer/sizer.dart';
 
@@ -26,7 +28,7 @@ class LoginFooter extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           ButtonLoading(
-            text: "Login",
+            text: "Iniciar sesion",
             isEnabled: true,
             enabledTextColor: Colors.black,
             isLoading: isLoading,
@@ -41,24 +43,53 @@ class LoginFooter extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "¿No tienes una cuenta?",
-                style: TextStyle(
-                  color: AppColors.white,
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              const AppText("¿No tienes una cuenta?", color: AppColors.white),
+              SizedBox(width: 1.5.w),
               GestureDetector(
                 onTap: onSignUpTap,
-                child: Text(
+                child: const AppText(
                   "Registrate",
-                  style: TextStyle(
-                    color: AppColors.white,
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  color: AppColors.white,
+                  underline: true,
                 ),
+              ),
+            ],
+          ),
+          SizedBox(height: 0.6.h),
+          Column(
+            children: [
+              const AppText("O", color: AppColors.white, fontSize: 7),
+              SizedBox(height: 0.6.h),
+              const AppText(
+                "Login With Social Media",
+                color: AppColors.white,
+                fontSize: 8,
+              ),
+              SizedBox(height: 2.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AppImage(
+                    imageUrl: 'assets/images/facebook_logo.png',
+                    width: 35,
+                    height: 35,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  SizedBox(width: 3.w),
+                  AppImage(
+                    imageUrl: 'assets/images/google_logo.jpg',
+                    width: 35,
+                    height: 35,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  SizedBox(width: 3.w),
+                  AppImage(
+                    imageUrl: 'assets/images/x_logo.png',
+                    width: 35,
+                    height: 35,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ],
               ),
             ],
           ),

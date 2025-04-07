@@ -18,7 +18,7 @@ class LoginBody extends StatelessWidget {
     final horizontalPadding = screenWidth * 0.06;
 
     return SizedBox(
-      height: screenHeight * 0.5, // Altura total de la sección
+      height: screenHeight * 0.46, // Altura total de la sección
       width: double.infinity,
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
@@ -64,13 +64,6 @@ class LoginBody extends StatelessWidget {
                 ),
                 fieldType: TextInputType.visiblePassword,
                 cornerRadius: 10.0,
-              ),
-              SizedBox(height: 2.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
-                  AppText('¿Olvidaste tu contraseña?', color: AppColors.white),
-                ],
               ),
             ],
           ),
