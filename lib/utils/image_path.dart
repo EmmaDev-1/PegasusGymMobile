@@ -4,4 +4,5 @@
 /// ensuring consistency and easier updates throughout the project.
 class ImagePath {
   static const String placeholder = 'assets/images/placeholder.png';
+  static const String appLogo = 'assets/images/Opcion2.jpg';
 }

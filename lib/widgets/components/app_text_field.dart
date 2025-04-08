@@ -1,10 +1,8 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import '../../utils/colors.dart';
 
-class AppTextField extends StatelessWidget {
+class AppTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final bool obscureText;
@@ -12,7 +10,6 @@ class AppTextField extends StatelessWidget {
   final IconData? prefixIcon;
   final Widget? suffixIcon;
   final TextInputType fieldType;
-  final double cornerRadius;
 
   const AppTextField({
     super.key,
@@ -23,8 +20,42 @@ class AppTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     required this.fieldType,
-    this.cornerRadius = 30.0,
   });
+
+  @override
+  State<AppTextField> createState() => _AppTextFieldState();
+}
+
+class _AppTextFieldState extends State<AppTextField> {
+  late bool _obscureText;
+  bool _showToggle = false; // Controla si se muestra el icono de toggle
+
+  @override
+  void initState() {
+    super.initState();
+    _obscureText = widget.obscureText;
+    // Si es un campo de contraseña, añadimos un listener para mostrar/ocultar el icono
+    if (widget.obscureText) {
+      widget.controller.addListener(_updateToggleVisibility);
+    }
+  }
+
+  void _updateToggleVisibility() {
+    final hasText = widget.controller.text.isNotEmpty;
+    if (hasText != _showToggle) {
+      setState(() {
+        _showToggle = hasText;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    if (widget.obscureText) {
+      widget.controller.removeListener(_updateToggleVisibility);
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,56 +66,84 @@ class AppTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: AppColors.darkGrey.withOpacity(0.2),
-            spreadRadius: 0.9,
-            blurRadius: 4,
-            offset: const Offset(0, 4),
+            color: AppColors.mediumGrey.withOpacity(0.1),
+            spreadRadius: 0.1,
+            blurRadius: 8,
+            offset: const Offset(0, 0.2),
           ),
         ],
       ),
       child: TextField(
         style: TextStyle(
-          color: AppColors.darkGrey,
+          color: AppColors.black,
           fontSize: 14.sp,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.w600,
         ),
-        controller: controller,
-        obscureText: obscureText,
-        onChanged: onChanged,
+        controller: widget.controller,
+        // Usamos el valor interno _obscureText para permitir el toggle
+        obscureText: _obscureText,
+        onChanged: widget.onChanged,
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.white,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(cornerRadius),
+            borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(cornerRadius),
-            borderSide: const BorderSide(color: AppColors.white, width: 1.0),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(cornerRadius),
-            borderSide: BorderSide(
-              color: AppColors.accent.withOpacity(0.4),
-              width: 1.8,
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: const BorderSide(
+              color: AppColors.lightPlusGrey,
+              width: 1.5,
             ),
           ),
-          hintText: hintText,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(30.0),
+            borderSide: BorderSide(
+              color: AppColors.accent.withOpacity(0.4),
+              width: 2,
+            ),
+          ),
+          hintText: widget.hintText,
           hintStyle: TextStyle(
             fontSize: 14.sp,
             fontFamily: 'Poppins',
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w800,
             color: AppColors.mediumGrey,
           ),
           contentPadding: EdgeInsets.all(2.h),
           prefixIcon:
-              prefixIcon != null
-                  ? Icon(prefixIcon, size: 20.sp, color: AppColors.darkGrey)
+              widget.prefixIcon != null
+                  ? Icon(
+                    widget.prefixIcon,
+                    size: 18.sp,
+                    color: AppColors.mediumGrey,
+                  )
                   : null,
-          suffixIcon: suffixIcon,
+          // Si se recibe un suffixIcon, se usa; de lo contrario, si es un campo de contraseña se muestra el icono de toggle
+          suffixIcon:
+              widget.suffixIcon ??
+              (widget.obscureText
+                  ? (_showToggle
+                      ? IconButton(
+                        icon: Icon(
+                          _obscureText
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          size: 18.sp,
+                          color: AppColors.mediumGrey,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                      )
+                      : null)
+                  : null),
         ),
-        keyboardType: fieldType,
+        keyboardType: widget.fieldType,
       ),
     );
   }
