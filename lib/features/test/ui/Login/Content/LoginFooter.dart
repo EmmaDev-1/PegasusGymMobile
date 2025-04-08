@@ -47,11 +47,7 @@ class LoginFooter extends StatelessWidget {
               SizedBox(width: 1.5.w),
               GestureDetector(
                 onTap: onSignUpTap,
-                child: const AppText(
-                  "Registrate",
-                  color: AppColors.white,
-                  underline: true,
-                ),
+                child: const AppText("Registrate", color: AppColors.white),
               ),
             ],
           ),

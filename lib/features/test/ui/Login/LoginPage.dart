@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pegasus_gym_mx/features/test/ui/Login/Content/LoginBody.dart';
 import 'package:pegasus_gym_mx/features/test/ui/Login/Content/LoginFooter.dart';
 import 'package:pegasus_gym_mx/features/test/ui/Login/Content/LoginHead.dart';
@@ -41,6 +42,7 @@ class LoginPage extends StatelessWidget {
                             },
                             onSignUpTap: () {
                               // Navegar al registro
+                              context.push('/signUp');
                             },
                           ),
                         ),

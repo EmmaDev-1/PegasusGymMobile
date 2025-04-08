@@ -50,7 +50,6 @@ class LoginBody extends StatelessWidget {
                 hintText: 'Correo electronico',
                 prefixIcon: Icons.person_outline,
                 fieldType: TextInputType.name,
-                cornerRadius: 10.0,
               ),
               SizedBox(height: 2.h),
               AppTextField(
@@ -63,7 +62,6 @@ class LoginBody extends StatelessWidget {
                   color: AppColors.darkGrey,
                 ),
                 fieldType: TextInputType.visiblePassword,
-                cornerRadius: 10.0,
               ),
             ],
           ),

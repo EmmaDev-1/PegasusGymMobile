@@ -12,7 +12,6 @@ class AppText extends StatelessWidget {
   final int? maxLines;
   final TextOverflow? overflow;
   final StrutStyle? strutStyle;
-  final bool underline; // 👈 NUEVO
 
   const AppText(
     this.data, {
@@ -26,22 +25,19 @@ class AppText extends StatelessWidget {
     this.maxLines,
     this.overflow,
     this.strutStyle,
-    this.underline = false, // 👈 valor por defecto
   });
 
   @override
   Widget build(BuildContext context) {
+    // Default style
     final defaultTextStyle = TextStyle(
       fontFamily: 'Poppins',
       fontSize: 14.sp,
       color: Colors.black,
       fontWeight: FontWeight.w600,
-      decoration:
-          underline
-              ? TextDecoration.lineThrough
-              : TextDecoration.overline, // 👈
     );
 
+    // Default properties are overwritten with those received
     final effectiveStyle = defaultTextStyle.copyWith(
       color: color,
       fontSize: fontSize,
