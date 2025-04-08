@@ -1,12 +1,32 @@
-// app_router.dart
 import 'package:go_router/go_router.dart';
+import 'package:flutter/material.dart';
+import 'package:pegasus_gym_mx/features/test/ui/Login/LoginPage.dart';
 
-/// AppRouter class holds the routing configuration for the application using GoRouter.
-/// This modular approach keeps all navigation logic in one place.
+import '../features/otp_code/ui/otp_code_screen.dart';
+import '../features/sign_up/ui/sign_up_screen.dart';
+
 class AppRouter {
-  // Define a static instance of GoRouter with the initial route and route definitions.
-  // You can easily expand this list with more routes as the application grows.
-  static final GoRouter router = GoRouter(initialLocation: '/', routes: [
+  static final GoRouter router = GoRouter(
+    initialLocation: '/login',
+    routes: [
+      GoRoute(
+        path: '/login',
+        builder: (BuildContext context, GoRouterState state) {
+          return const LoginPage();
+        },
+      ),
+      GoRoute(
+        path: '/signUp',
+        builder: (BuildContext context, GoRouterState state) {
+          return const SignUpScreen();
+        },
+      ),
+      GoRoute(
+        path: '/otpCode',
+        builder: (BuildContext context, GoRouterState state) {
+          return const OtpCodeScreen();
+        },
+      ),
     ],
   );
 }
