@@ -1,5 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:pegasus_gym_mx/features/reset_password/ui/change_password_screen.dart';
+import 'package:pegasus_gym_mx/features/reset_password/ui/reset_password_screen.dart';
 import 'package:pegasus_gym_mx/features/test/ui/Login/LoginPage.dart';
 
 import '../features/otp_code/ui/otp_code_screen.dart';
@@ -25,6 +27,18 @@ class AppRouter {
         path: '/otpCode',
         builder: (BuildContext context, GoRouterState state) {
           return const OtpCodeScreen();
+        },
+      ),
+      GoRoute(
+        path: '/passwordReset',
+        builder: (BuildContext context, GoRouterState state) {
+          return const ResetPasswordScreen();
+        },
+      ),
+      GoRoute(
+        path: '/passwordChange',
+        builder: (BuildContext context, GoRouterState state) {
+          return const ChangePasswordScreen();
         },
       ),
     ],

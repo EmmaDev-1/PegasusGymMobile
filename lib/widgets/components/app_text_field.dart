@@ -129,8 +129,8 @@ class _AppTextFieldState extends State<AppTextField> {
                       ? IconButton(
                         icon: Icon(
                           _obscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                              ? Icons.visibility_off_outlined
+                              : Icons.visibility_outlined,
                           size: 18.sp,
                           color: AppColors.mediumGrey,
                         ),

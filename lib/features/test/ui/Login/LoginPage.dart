@@ -34,6 +34,12 @@ class LoginPage extends StatelessWidget {
                       children: [
                         const LoginHead(),
                         const LoginBody(),
+                        TextButton(
+                          onPressed: () {
+                            context.push('/passwordReset');
+                          },
+                          child: Text('recuperar cuenta'),
+                        ),
                         Expanded(
                           child: LoginFooter(
                             isLoading: false,
