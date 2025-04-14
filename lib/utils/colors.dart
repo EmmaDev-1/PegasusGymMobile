@@ -17,5 +17,21 @@ class AppColors {
 
   static const Color red = Color.fromARGB(255, 255, 0, 0);
 
+  static const Color lightred = Color.fromARGB(255, 255, 235, 238);
+
+  static const Color darkred = Color.fromARGB(255, 196, 40, 40);
+
   static const Color darkBlue = Color(0xFF1F4368);
+
+  static const Color green = Color.fromARGB(255, 76, 175, 80);
+
+  static const Color darkGreen = Color.fromARGB(255, 46, 125, 50);
+
+  static const Color lightGreen = Color.fromARGB(255, 232, 245, 233);
+
+  static const Color orange = Color.fromARGB(255, 255, 152, 0);
+
+  static const Color darkorange = Color.fromARGB(255, 239, 108, 0);
+
+  static const Color lightorange = Color.fromARGB(255, 255, 243, 224);
 }
